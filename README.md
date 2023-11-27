@@ -7,7 +7,7 @@ With C++ 64-bit the performance is 3x of these numbers
 
 ## Installation
 
-To build this project Visual Studio for Mac was used. In total there are 8 prime number algorithms out of which 3 are commented out due to extremely poor performance with large numbers.\
+To build this project Visual Studio for Mac was used. In total there are 8 prime number algorithms out of which 3 are commented out due to extremely poor performance with large numbers.
 The performance numbers of the remaining 5 algorithms are as follows:\
 
 Algorithm Name: **Textbook Large Prime Rules**\
@@ -16,7 +16,7 @@ Elapsed time to compute first 1000 numbers: 00:00:00.0000194\
 Elapsed time to compute first 10000 numbers: 00:00:00.0001732\
 Elapsed time to compute first 100000 numbers: 00:00:00.0026653\
 Elapsed time to compute first 1000000 numbers: 00:00:00.0522971\
-Elapsed time to compute first 10000000 numbers: 00:00:01.2028524\
+Elapsed time to compute first 10000000 numbers: 00:00:01.2028524
 
 Algorithm Name: **Miller-Rabin**\
 Elapsed time to compute first 100 numbers: 00:00:00.0000936\
