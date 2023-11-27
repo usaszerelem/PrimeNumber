@@ -8,7 +8,7 @@ With C++ 64-bit the performance is 3x of these numbers
 ## Installation
 
 To build this project Visual Studio for Mac was used. In total there are 8 prime number algorithms out of which 3 are commented out due to extremely poor performance with large numbers.
-The performance numbers of the remaining 5 algorithms are as follows:\
+The performance numbers of the remaining 5 algorithms are as follows:
 
 Algorithm Name: **Textbook Large Prime Rules**\
 Elapsed time to compute first 100 numbers: 00:00:00.0002091\
