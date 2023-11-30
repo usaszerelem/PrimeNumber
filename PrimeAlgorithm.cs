@@ -6,23 +6,12 @@ namespace PrimeNumber
 {
 	public abstract class PrimeAlgorithm
 	{
-        public class Statistics
-        {
-            public Statistics()
-            {
-                uNumPrime = 0;
-                elapsed = TimeSpan.MinValue;
-            }
-
-            public uint uNumPrime;
-            public TimeSpan elapsed;
-        }
-
         private Stopwatch stopwatch = new Stopwatch();
         
-        public PrimeAlgorithm(string algorithmName)
+        public PrimeAlgorithm(string algorithmName, bool isFast)
 		{
             AlgorithmName = algorithmName;
+            IsFast = isFast;
         }
 
         public string AlgorithmName
@@ -31,42 +20,30 @@ namespace PrimeNumber
             private set;
         }
 
-        public List<KeyValuePair<uint, Statistics?>> StartComputation(uint[] uNumbers)
+        public bool IsFast
         {
-            uint uMaxLimit = 0;
-            var stats = new List<KeyValuePair<uint, Statistics?>>();
+            get;
+            private set;
+        }
 
-            try
+        public Tuple<uint[], TimeSpan> FindAllPrimes(uint uUpperLimit)
+        {
+            List<uint> uPrimeNumbers = new List<uint>();
+
+            stopwatch.Reset();
+            stopwatch.Start();
+
+            for (uint uOneNumber = 0; uOneNumber <= uUpperLimit; uOneNumber++)
             {
-                for (uint uNumIdx = 0; uNumIdx < uNumbers.Count(); uNumIdx++)
+                if (IsPrime(uOneNumber) == true)
                 {
-                    stopwatch.Reset();
-                    stopwatch.Start();
-                    Statistics primeStats = new Statistics();
-                    uMaxLimit = uNumbers[uNumIdx];
-
-                    Console.WriteLine("Computing the first {0} prime numbers...", uMaxLimit);
-
-                    for (uint uOneNumber = 0; uOneNumber <= uMaxLimit; uOneNumber++)
-                    {
-                        if (IsPrime(uOneNumber) == true)
-                        {
-                            primeStats.uNumPrime++;
-                        }
-                    }
-
-                    stopwatch.Stop();
-                    primeStats.elapsed = stopwatch.Elapsed;
-                    stats.Add(new KeyValuePair<uint, Statistics?>(uMaxLimit, primeStats));
+                    uPrimeNumbers.Add(uOneNumber);
                 }
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                stats.Add(new KeyValuePair<uint, Statistics?>(uMaxLimit, null));
-            }
 
-            return stats;
+            stopwatch.Stop();
+
+            return Tuple.Create(uPrimeNumbers.ToArray(), stopwatch.Elapsed);
         }
 
         abstract protected bool IsPrime(uint number);

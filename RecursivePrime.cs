@@ -5,7 +5,7 @@ namespace PrimeNumber
 {
 	public class RecursivePrime : PrimeAlgorithm
     {
-		public RecursivePrime() : base("Slow Recursive Prime")
+		public RecursivePrime() : base("Slow Recursive Prime", false)
         {
 		}
 

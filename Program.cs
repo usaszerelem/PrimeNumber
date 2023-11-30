@@ -13,32 +13,46 @@ partial class Program
         {
             new PrimeRuleLargeNum(),
             new MillerRabinPrime(),
-            new FermatPrime(),
-            new OoverNPrime(),
-            new PrimalityTestPrime()
-            // new SievePrime(), Commenting out as it is too slow
-            // new RecursivePrime(), Commenting out as it exhausts the stack
-            // new BruteForcePrime(), Way too slow with large numbers            
+            new PrimalityTestPrime(),
+            new BruteForcePrime(),
+            new SievePrime(),
+            new RecursivePrime()
         };
 
         Console.WriteLine("Prime Algorithm Performance Measurements in C#");
         Console.WriteLine("With C++ 32-bit the performance is 2x of these numbers");
         Console.WriteLine("With C++ 64-bit the performance is 3x of these numbers\n");
 
-        uint[] uLimit = { 100, 1000, 10000, 100000, 1000000, 10000000};
+        Tuple<uint, uint>[] primeLimitsArr = new Tuple<uint, uint>[]
+        {
+            Tuple.Create<uint, uint>(100, 25),
+            Tuple.Create<uint, uint>(1000, 168),
+            Tuple.Create<uint, uint>(10000, 1229),
+            Tuple.Create<uint, uint>(100000, 9592),
+            Tuple.Create<uint, uint>(1000000, 78498),
+            Tuple.Create<uint, uint>(10000000, 664579)
+        };
 
         foreach(PrimeAlgorithm prime in primeAlgorithms)
         {
-            Console.WriteLine("Algorithm Name: {0}", prime.AlgorithmName);
+            Console.WriteLine("Algorithm Name: {0} ({1})", prime.AlgorithmName, prime.IsFast ? "FAST" : "SLOW");
 
-            var stats = prime.StartComputation(uLimit);
+            int NumLimitRuns = prime.IsFast == true ? primeLimitsArr.Count() : 4;
 
-            foreach (var stat in stats)
+            for (int runCount = 0; runCount < NumLimitRuns; runCount++)
             {
-                if (stat.Value == null)
-                    Console.WriteLine("Error happened computing first {0} numbers.", stat.Key);
+                Tuple<uint[], TimeSpan> ret = prime.FindAllPrimes(primeLimitsArr[runCount].Item1);
+
+                if (ret.Item1.Count() != primeLimitsArr[runCount].Item2)
+                {
+                    Console.WriteLine("Error - Algorithm found {0} prime numbers. " +
+                        "Expected: {1}", ret.Item1.Count(), primeLimitsArr[runCount].Item2);
+                }
                 else
-                    Console.WriteLine("Elapse time to compute first {0} numbers: {1}", stat.Key, stat.Value.elapsed);
+                {
+                    Console.WriteLine("Elapsed time to compute first {0} numbers: {1}",
+                        primeLimitsArr[runCount].Item1, ret.Item2);
+                }
             }
 
             Console.WriteLine();

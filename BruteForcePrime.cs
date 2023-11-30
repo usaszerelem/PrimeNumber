@@ -3,7 +3,7 @@ namespace PrimeNumber
 {
 	public class BruteForcePrime : PrimeAlgorithm
     {
-		public BruteForcePrime() : base("Brute Force Prime Computation")
+		public BruteForcePrime() : base("Brute Force Prime Computation", false)
         {
 		}
 

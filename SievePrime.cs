@@ -4,7 +4,7 @@ namespace PrimeNumber
 {
     public class SievePrime : PrimeAlgorithm
     {
-        public SievePrime() : base("Sieve Prime")
+        public SievePrime() : base("Sieve Prime", false)
         {
         }
 

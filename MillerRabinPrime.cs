@@ -5,7 +5,7 @@ namespace PrimeNumber
 {
 	public class MillerRabinPrime : PrimeAlgorithm
     {
-        public MillerRabinPrime() : base("Miller-Rabin")
+        public MillerRabinPrime() : base("Miller-Rabin", true)
         {
         }
 

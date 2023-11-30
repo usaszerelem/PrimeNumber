@@ -4,7 +4,7 @@ namespace PrimeNumber
 {
 	public class PrimalityTestPrime : PrimeAlgorithm
     {
-		public PrimalityTestPrime() : base("Primality Test Prime")
+		public PrimalityTestPrime() : base("Primality Test Prime", true)
         {
 		}
 

@@ -3,7 +3,7 @@ namespace PrimeNumber
 {
 	public class PrimeRuleLargeNum : PrimeAlgorithm
     {
-		public PrimeRuleLargeNum() : base("Textbook Large Prime Rules")
+		public PrimeRuleLargeNum() : base("Textbook Large Prime Rules", true)
         {
 		}
 
